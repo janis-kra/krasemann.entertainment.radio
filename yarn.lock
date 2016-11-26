@@ -539,6 +539,10 @@ express-logging:
   dependencies:
     on-headers "^1.0.0"
 
+express-readbody:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/express-readbody/-/express-readbody-1.0.0.tgz#3b99ef273d36580bb74ecd1a77a1f82f2f30b8a3"
+
 fast-levenshtein@~2.0.4:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.5.tgz#bd33145744519ab1c36c3ee9f31f08e9079b67f2"
@@ -754,6 +758,10 @@ is-resolvable@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-resolvable/-/is-resolvable-1.0.0.tgz#8df57c61ea2e3c501408d100fb013cf8d6e0cc62"
   dependencies:
     tryit "^1.0.1"
+
+is-url:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.2.tgz#498905a593bf47cc2d9e7f738372bbf7696c7f26"
 
 isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
