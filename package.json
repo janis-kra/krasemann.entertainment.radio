@@ -1,0 +1,21 @@
+{
+  "name": "krasemann.entertainment.webservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Janis Krasemann <krasemann.janis@gmail.com> (http://www.github.com/janis-kra)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express-logging": "^1.1.1",
+    "logops": "^1.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^3.11.0",
+    "eslint-config-janiskra": "^1.4.0"
+  }
+}
