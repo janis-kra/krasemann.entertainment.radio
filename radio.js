@@ -1,10 +1,12 @@
 const exec = require('child_process').exec;
 
+require('dotenv').config();
+
 let logger;
 let vlc;
 
 const run = (url) => {
-  vlc = exec(`vlc ${url} -I dummy`, (error) => {
+  vlc = exec(`${process.env.vlc || 'vlc'} ${url} -I dummy`, (error) => {
     if (error) {
       logger.error(`exec error: ${error}`);
     } else {
