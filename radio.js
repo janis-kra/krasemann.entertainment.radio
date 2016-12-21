@@ -1,4 +1,4 @@
-const exec = require('child_process').exec;
+const spawn = require('child_process').spawn;
 
 require('dotenv').config();
 
@@ -6,19 +6,17 @@ let logger;
 let vlc;
 
 const run = (url) => {
-  vlc = exec(`${process.env.vlc || 'vlc'} ${url} -I dummy`, (error) => {
-    if (error) {
-      logger.error(`exec error: ${error}`);
-    } else {
-      logger.info(`stream ${url} started`);
-    }
+  vlc = spawn(process.env.vlc, [url, '-I dummy']);
+  vlc.on('close', (code, signal) => {
+    logger.info(`received ${signal} - radio stopped`);
   });
 };
 
 const stop = () => {
   if (vlc) {
     vlc.kill();
-    logger.info('radio stopped');
+    vlc.kill('SIGHUP');
+    vlc.kill('SIGTERM');
   }
 };
 
