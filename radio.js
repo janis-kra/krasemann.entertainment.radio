@@ -15,8 +15,6 @@ const run = (url) => {
 const stop = () => {
   if (vlc) {
     vlc.kill();
-    vlc.kill('SIGHUP');
-    vlc.kill('SIGTERM');
   }
 };
 
