@@ -23,7 +23,7 @@ const run = (url) => {
     vlc.on('close', (code, signal) => {
       logger.info(`received ${signal} - radio stopped`);
     });
-  }, 500);
+  }, 100);
 };
 
 const factory = (log) => {
