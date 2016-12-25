@@ -30,4 +30,12 @@ app.put('/stop', (req, res) => {
   res.sendStatus(200);
 });
 
+app.get('/current', (req, res) => {
+  res.status(200).json({ url: radio.current() });
+});
+
+app.get('/running', (req, res) => {
+  res.status(200).json(radio.running());
+});
+
 app.listen(3000);

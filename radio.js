@@ -3,25 +3,26 @@ const spawn = require('child_process').spawn;
 require('dotenv').config();
 
 let logger;
-let running;
+let running = false;
 const streams = [];
 
 const stop = () => {
   running = false;
-  streams.forEach(stream => stream.vlc.kill());
+  const stream = streams.pop();
+  stream.vlc.kill();
 };
 
 const run = (url) => {
   if (running) {
     stop();
   }
+  running = true;
   setTimeout(() => {
     const stream = {
       url: url,
       vlc: spawn(process.env.vlc, [url, '-I dummy'])
     };
-    running = true;
-    stream.on('close', (code, signal) => {
+    stream.vlc.on('close', (code, signal) => {
       logger.info(`received ${signal} - radio stopped`);
     });
     streams.push(stream);
@@ -30,11 +31,14 @@ const run = (url) => {
 
 const current = () => (streams.length > 0 ? streams[0].url : '');
 
+const isRunning = () => running;
+
 const factory = (log) => {
   logger = log;
   return {
     current: current,
     run: run,
+    running: isRunning,
     stop: stop
   };
 };
