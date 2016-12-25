@@ -4,11 +4,11 @@ require('dotenv').config();
 
 let logger;
 let running;
-const vlcProcesses = [];
+const streams = [];
 
 const stop = () => {
   running = false;
-  vlcProcesses.forEach(vlc => vlc.kill());
+  streams.forEach(stream => stream.vlc.kill());
 };
 
 const run = (url) => {
@@ -16,18 +16,24 @@ const run = (url) => {
     stop();
   }
   setTimeout(() => {
-    const vlc = spawn(process.env.vlc, [url, '-I dummy']);
+    const stream = {
+      url: url,
+      vlc: spawn(process.env.vlc, [url, '-I dummy'])
+    };
     running = true;
-    vlc.on('close', (code, signal) => {
+    stream.on('close', (code, signal) => {
       logger.info(`received ${signal} - radio stopped`);
     });
-    vlcProcesses.push(vlc);
+    streams.push(stream);
   }, 100);
 };
+
+const current = () => (streams.length > 0 ? streams[0].url : '');
 
 const factory = (log) => {
   logger = log;
   return {
+    current: current,
     run: run,
     stop: stop
   };
